@@ -1,0 +1,4 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Graphic xmlns:fc="http://ns.adobe.com/flashcatalyst/2009" xmlns:d="http://ns.adobe.com/fxg/2008/dt" xmlns="http://ns.adobe.com/fxg/2008" version="2.0">
+	<BitmapImage source="@Embed('SearchBar.assets/catalystClipPaste227834397828033836.png')"/>
+</Graphic>
