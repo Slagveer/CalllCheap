@@ -1,0 +1,47 @@
+/* CSS file */
+@namespace s "library://ns.adobe.com/flex/spark";
+@namespace renderers  "renderers.*";
+
+
+renderers|BedrijfRenderer
+{
+	padding-top: 15;
+	padding-left: 10;
+	padding-right: 10;
+	padding-bottom: 15;
+	horizontal-gap: 10;
+	vertical-gap: 10;
+	
+	naam-style: naamRendererStyle;
+	duur-style: duurRendererStyle;
+	goedkoop-style: goedkoopRendererStyle;
+	separator: Embed(source='/styles/images/separator.png' );
+	
+	background: Embed(source='/styles/images/background_up.png', 
+		scaleGridLeft=10, scaleGridTop=20, scaleGridRight=11, scaleGridBottom=21 );
+}
+
+renderers|BedrijfRenderer:selected
+{
+	background: Embed(source='/styles/images/background_down.png',
+		scaleGridLeft=50, scaleGridTop=20, scaleGridRight=51, scaleGridBottom=21 );
+}
+.naamRendererStyle
+{
+	font-size: 30;
+	color: #ffffff;
+	font-family: _sans;
+	font-weight: normal;
+}
+.duurRendererStyle
+{
+	font-size: 16;
+	color: #16AEE0;
+	font-family: _sans;
+}
+.goedkoopRendererStyle
+{
+	font-size: 20;
+	color: #00CD51;
+	font-family: _sans;
+}

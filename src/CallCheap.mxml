@@ -6,6 +6,9 @@
 			
 		]]>
 	</fx:Script>
+	
+	<fx:Style source="styles/Main.css"/>
+	
 	<!--<fx:Style>
 	@namespace s "library://ns.adobe.com/flex/spark";
 	
@@ -20,6 +23,7 @@
 	skinClass: ClassReference("spark.skins.mobile.TextAreaSkin");
 	}   
 	</fx:Style>-->
+	
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>

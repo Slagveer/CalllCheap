@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
-		xmlns:s="library://ns.adobe.com/flex/spark" title="HomeView" xmlns:fxg="skins.fxg.*" creationComplete="view1_creationCompleteHandler(event)">
+		xmlns:s="library://ns.adobe.com/flex/spark" title="HomeView" xmlns:fxg="skins.fxg.*" creationComplete="view1_creationCompleteHandler(event)" xmlns:dao="dao.*">
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 		<dao:BedrijfDAO id="srv"/>
@@ -20,21 +20,72 @@
 			{
 				// TODO Auto-generated method stub
 				this.searchBar.percentWidth = 100;
-				
+				this.data = srv.findByName('');
 			}
 			
 		]]>
 	</fx:Script>
-	<s:HGroup id="searchBar" horizontalAlign="center" gap="0" paddingTop="10">
+	
+	<s:Group>
+		<s:Rect width="500" height="100">
+			<s:fill><s:SolidColor color="0x1E2427" /></s:fill>
+		</s:Rect>
+		<s:Line xFrom="0" yFrom="88" xTo="500" yTo="88">
+			<s:stroke>
+				<s:SolidColorStroke color="0x141B1F"/>
+			</s:stroke>
+		</s:Line>
+		<s:Line xFrom="0" yFrom="89" xTo="500" yTo="89">
+			<s:stroke>
+				<s:SolidColorStroke color="0x272E31"/>
+			</s:stroke>
+		</s:Line>
 		
-		<s:Button skinClass="skins.actionscript.SearchBarButton" width="55" height="53"/>
+		<s:Group id="searchBar">
+			<s:layout>
+				<s:HorizontalLayout horizontalAlign="center" gap="0" verticalAlign="middle" paddingTop="15"/>
+			</s:layout>
 		
-		<s:SkinnableContainer skinClass="skins.actionscript.SearchBarTextInput" width="384">
-			<s:TextInput left="0" top="1" right="10" borderVisible="false" contentBackgroundColor="0xFFFFFF" >
-				<s:text>Lorem ipsum dolor sit amet.</s:text>
-			</s:TextInput>
-		</s:SkinnableContainer>		
-	</s:HGroup>
+			<s:Button skinClass="skins.actionscript.SearchBarButton" width="55" height="53"/>
+			
+			<s:SkinnableContainer skinClass="skins.actionscript.SearchBarTextInput" width="384">
+				<s:TextInput left="0" top="1" right="10" borderVisible="false" contentBackgroundColor="0xFFFFFF" >
+					<s:text>Lorem ipsum dolor sit amet.</s:text>
+				</s:TextInput>
+			</s:SkinnableContainer>	
+		</s:Group>
+	</s:Group>
+	
+	<s:List id="list" top="90" bottom="90" left="0" right="0" dataProvider="{data}" horizontalScrollPolicy="off" itemRenderer="renderers.BedrijfRenderer"/>
+	
+	<s:Group bottom="0">
+		<s:Group><s:layout>
+			<s:VerticalLayout/>
+		</s:layout>
+		<s:Line xFrom="0" yFrom="50" xTo="500" yTo="50">
+			<s:stroke>
+				<s:SolidColorStroke color="0x141B1F"/>
+			</s:stroke>
+		</s:Line>
+		</s:Group>
+		<s:Line xFrom="0" yFrom="51" xTo="500" yTo="51">
+			<s:stroke>
+				<s:SolidColorStroke color="0x272E31"/>
+			</s:stroke>
+		</s:Line>
+		<s:Rect width="500" height="50" bottom="0">
+			<s:fill><s:SolidColor color="0x1E2427" /></s:fill>
+		</s:Rect>
+		<s:Rect width="500" height="50" bottom="50">
+			<s:fill><s:SolidColor color="0x22272A" /></s:fill>
+		</s:Rect>
+		
+		<s:Label text="gddff sandsadksadk" color="0xffffff"/>
+	</s:Group>
+	
+	<!--<s:SkinnableContainer skinClass="skins.actionscript.BottomStateBar" width="384" bottom="0">
+		<s:Label bottom="0" text="dffghjkalsdsa" left="0" right="0" height="90" color="0xffffff"/>
+	</s:SkinnableContainer>-->
 
 	
 </s:View>

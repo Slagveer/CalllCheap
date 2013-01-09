@@ -91,7 +91,7 @@ package dao
 			stmt.parameters[2] = bedrijf.duur;
 			stmt.parameters[3] = bedrijf.goedkoop;
 			stmt.parameters[4] = bedrijf.datum;
-			stmt.parameters[5] = bedrijf.correct ? bedrijf.goedkoop : null;
+			stmt.parameters[5] = bedrijf.goedkoop != null ?  true : false;
 			stmt.execute();
 		}
 		
@@ -151,8 +151,8 @@ package dao
 			stream.open(file, FileMode.READ);
 			var xml:XML = XML(stream.readUTFBytes(stream.bytesAvailable));
 			stream.close();
-			var bedrijfDAO:BedrijfDAO = new BedrijfDAO();
-			for each (var bdr:XML in xml.Bedrijf)
+			var bedrijfDAO:BedrijfDAO = new BedrijfDAO();trace(xml);
+			for each (var bdr:XML in xml.Bedrijven)
 			{
 				var bedrijf:Bedrijf = new Bedrijf();
 				bedrijf.id = bdr.id;
