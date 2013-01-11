@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
-		xmlns:s="library://ns.adobe.com/flex/spark" title="HomeView" xmlns:fxg="skins.fxg.*" creationComplete="view1_creationCompleteHandler(event)" xmlns:dao="dao.*">
+		xmlns:s="library://ns.adobe.com/flex/spark" title="CallCheap" xmlns:fxg="skins.fxg.*" creationComplete="creationCompleteHandler(event)" xmlns:dao="dao.*">
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 		<dao:BedrijfDAO id="srv"/>
@@ -16,7 +16,7 @@
 				
 			}
 			
-			protected function view1_creationCompleteHandler(event:FlexEvent):void
+			protected function creationCompleteHandler(event:FlexEvent):void
 			{
 				// TODO Auto-generated method stub
 				this.searchBar.percentWidth = 100;
@@ -48,8 +48,8 @@
 		
 			<s:Button skinClass="skins.actionscript.SearchBarButton" width="55" height="53"/>
 			
-			<s:SkinnableContainer skinClass="skins.actionscript.SearchBarTextInput" width="384">
-				<s:TextInput left="0" top="1" right="10" borderVisible="false" contentBackgroundColor="0xFFFFFF" >
+			<s:SkinnableContainer skinClass="skins.actionscript.SearchBarTextInput" width="374">
+				<s:TextInput bottom="0" left="0" top="1" right="10" styleName="searchbar-text" borderVisible="false" height="52" contentBackgroundColor="0xFFFFFF">
 					<s:text>Lorem ipsum dolor sit amet.</s:text>
 				</s:TextInput>
 			</s:SkinnableContainer>	
@@ -59,33 +59,29 @@
 	<s:List id="list" top="90" bottom="90" left="0" right="0" dataProvider="{data}" horizontalScrollPolicy="off" itemRenderer="renderers.BedrijfRenderer"/>
 	
 	<s:Group bottom="0">
-		<s:Group><s:layout>
-			<s:VerticalLayout/>
-		</s:layout>
-		<s:Line xFrom="0" yFrom="50" xTo="500" yTo="50">
-			<s:stroke>
-				<s:SolidColorStroke color="0x141B1F"/>
-			</s:stroke>
-		</s:Line>
-		</s:Group>
-		<s:Line xFrom="0" yFrom="51" xTo="500" yTo="51">
-			<s:stroke>
-				<s:SolidColorStroke color="0x272E31"/>
-			</s:stroke>
-		</s:Line>
-		<s:Rect width="500" height="50" bottom="0">
+		<s:Rect width="500" height="49" bottom="0">
 			<s:fill><s:SolidColor color="0x1E2427" /></s:fill>
 		</s:Rect>
-		<s:Rect width="500" height="50" bottom="50">
+		<s:Rect width="500" height="39" bottom="49">
 			<s:fill><s:SolidColor color="0x22272A" /></s:fill>
 		</s:Rect>
-		
-		<s:Label text="gddff sandsadksadk" color="0xffffff"/>
-	</s:Group>
-	
-	<!--<s:SkinnableContainer skinClass="skins.actionscript.BottomStateBar" width="384" bottom="0">
-		<s:Label bottom="0" text="dffghjkalsdsa" left="0" right="0" height="90" color="0xffffff"/>
-	</s:SkinnableContainer>-->
 
-	
+		<s:Group bottom="0" height="90">
+			<s:layout>
+				<s:VerticalLayout gap="0" paddingTop="0" paddingBottom="0"/>
+			</s:layout>
+			<s:Line xFrom="0" yFrom="90" xTo="500" yTo="90">
+				<s:stroke>
+					<s:SolidColorStroke color="0x141B1F" weight="1"/>
+				</s:stroke>
+			</s:Line>
+			<s:Line xFrom="0" yFrom="89" xTo="500" yTo="89">
+				<s:stroke>
+					<s:SolidColorStroke color="0x272E31" weight="1"/>
+				</s:stroke>
+			</s:Line>
+		</s:Group>
+		<s:Label fontFamily="droid-sans-cff" text="Er bevinden zich {data.length} nummers op dit toestel.\n
+				 En 0 nummers op de server." fontSize="14" color="0xffffff" right="0" top="0" bottom="0" left="0"/>
+	</s:Group>
 </s:View>

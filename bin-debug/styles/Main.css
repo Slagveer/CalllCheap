@@ -2,6 +2,52 @@
 @namespace s "library://ns.adobe.com/flex/spark";
 @namespace renderers  "renderers.*";
 
+@font-face { 
+	src: url("../assets/fonts/droid-sans/DroidSans.ttf"); 
+	fontFamily: droid-sans; 
+	embedAsCFF: false; 
+}
+
+@font-face { 
+	src: url("../assets/fonts/droid-sans/DroidSans.ttf"); 
+	fontFamily: droid-sans-cff; 
+	embedAsCFF: true; 
+}
+
+@font-face { 
+	src: url("../assets/fonts/droid-sans/DroidSans-Bold.ttf"); 
+	fontFamily: droid-sans-bold; 
+	embedAsCFF: false; 
+}
+
+@font-face { 
+	src: url("../assets/fonts/droid-sans/DroidSans-Bold.ttf"); 
+	fontFamily: droid-sans-bold-cff; 
+	embedAsCFF: true; 
+}
+
+s|ViewNavigatorApplication {
+	fontFamily: droid-sans;
+}
+
+s|ActionBar { 
+	fontFamily: droid-sans;
+	color: #FFFFFF;
+	skinClass: ClassReference("skins.actionscript.ActionBar");
+}
+
+s|ActionBar #titleDisplay{
+	font-family: "droid-sans-bold-cff";
+	fontWeight: bold;
+	fontSize: 25px;
+	left: 0;
+	right: 0;
+	dropShadowVisible: true;
+	shadowAlpha: .9;
+	shadowColor: 0xffffff;
+	shadowAngle: 120;
+	shadowDistance: 1;
+}
 
 renderers|BedrijfRenderer
 {
@@ -44,4 +90,11 @@ renderers|BedrijfRenderer:selected
 	font-size: 20;
 	color: #00CD51;
 	font-family: _sans;
+}
+
+.searchbar-text{
+	text-align: left; 
+	font-size: 18px;
+	lineHeight: 10px;
+	focusAlpha:0;
 }
