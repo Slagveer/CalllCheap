@@ -7,12 +7,13 @@
 	</fx:Declarations>
 	<fx:Script>
 		<![CDATA[
+			import mx.collections.ArrayCollection;
 			import mx.events.FlexEvent;
 			
 			protected function searchBar_clickHandler(event:MouseEvent):void
 			{
 				// TODO Auto-generated method stub
-				trace(33);
+				this.data = srv.findByName(this.key.text);
 				
 			}
 			
@@ -46,10 +47,10 @@
 				<s:HorizontalLayout horizontalAlign="center" gap="0" verticalAlign="middle" paddingTop="15"/>
 			</s:layout>
 		
-			<s:Button skinClass="skins.actionscript.SearchBarButton" width="55" height="53"/>
+			<s:Button skinClass="skins.actionscript.SearchBarButton" width="55" height="53" click="searchBar_clickHandler(event)"/>
 			
 			<s:SkinnableContainer skinClass="skins.actionscript.SearchBarTextInput" width="374">
-				<s:TextInput bottom="0" left="0" top="1" right="10" styleName="searchbar-text" borderVisible="false" height="52" contentBackgroundColor="0xFFFFFF">
+				<s:TextInput id="key" bottom="0" left="0" top="1" right="10" styleName="searchbar-text" borderVisible="false" height="52" contentBackgroundColor="0xFFFFFF">
 					<s:text>Lorem ipsum dolor sit amet.</s:text>
 				</s:TextInput>
 			</s:SkinnableContainer>	
@@ -81,7 +82,7 @@
 				</s:stroke>
 			</s:Line>
 		</s:Group>
-		<s:Label fontFamily="droid-sans-cff" text="Er bevinden zich {data.length} nummers op dit toestel.\n
-				 En 0 nummers op de server." fontSize="14" color="0xffffff" right="0" top="0" bottom="0" left="0"/>
+		<s:Label styleName="state" text="Er bevinden zich {data.length} nummers op dit toestel." fontSize="14" right="0" top="30" bottom="0" left="0"/>
+		<s:Label styleName="state" text="En 0 nummers op de server." fontSize="14" right="0" top="45" bottom="0" left="0"/>
 	</s:Group>
 </s:View>

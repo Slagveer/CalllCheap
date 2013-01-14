@@ -160,11 +160,13 @@ package renderers
 		
 		override protected function setValues():void
 		{
-			nameField.text = String(data.naam).slice(0, 25).concat(String(data.naam).length > 25 ? "..." : "");
-			cheapField.text =  data.goedkoop;
-			expensiveField.htmlText = data.duur;
-			avatar.source = mobileClass;
-			arrow.source = arrowClass
+			if(data != null){
+				nameField.text = String(data.naam).slice(0, 25).concat(String(data.naam).length > 25 ? "..." : "");
+				cheapField.text =  data.goedkoop;
+				expensiveField.htmlText = data.duur;
+				avatar.source = mobileClass;
+				arrow.source = arrowClass
+			}
 		}
 		
 		override protected function updateSkin():void

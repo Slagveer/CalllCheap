@@ -42,9 +42,10 @@ s|ActionBar #titleDisplay{
 	fontSize: 25px;
 	left: 0;
 	right: 0;
-	dropShadowVisible: true;
+	dropShadowVisible: false;
+	dropShadowEnabled:false;
 	shadowAlpha: .9;
-	shadowColor: 0xffffff;
+	shadowColor: "0x000000";
 	shadowAngle: 120;
 	shadowDistance: 1;
 }
@@ -97,4 +98,24 @@ renderers|BedrijfRenderer:selected
 	font-size: 18px;
 	lineHeight: 10px;
 	focusAlpha:0;
+	font-family: "Droid Sans";
+}
+
+.state{
+	font-family: "Droid Sans";
+	text-align: center;
+	color: #7B878B;
+	font-size: 10px;
+}
+
+.state .total{
+	color: #7B878B;	
+}
+
+.title{
+	font-family: "Droid Sans";
+	fontWeight: bold;
+	fontSize: 25px;
+	left: 0;
+	right: 0;
 }
