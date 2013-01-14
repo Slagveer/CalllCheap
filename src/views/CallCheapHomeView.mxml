@@ -7,14 +7,21 @@
 	</fx:Declarations>
 	<fx:Script>
 		<![CDATA[
-			import mx.collections.ArrayCollection;
 			import mx.events.FlexEvent;
+			[Bindable]
+			var startLength:Number = 0;
+			[Bindable]
+			var searchLength:Number = 0;
 			
 			protected function searchBar_clickHandler(event:MouseEvent):void
 			{
 				// TODO Auto-generated method stub
 				this.data = srv.findByName(this.key.text);
-				
+				if(data){
+					this.searchLength = this.data.length;
+				}else{
+					this.searchLength = 0;
+				}
 			}
 			
 			protected function creationCompleteHandler(event:FlexEvent):void
@@ -22,6 +29,10 @@
 				// TODO Auto-generated method stub
 				this.searchBar.percentWidth = 100;
 				this.data = srv.findByName('');
+				if(data){
+					startLength = this.data.length;
+					searchLength = this.data.length;
+				}
 			}
 			
 		]]>
@@ -82,7 +93,27 @@
 				</s:stroke>
 			</s:Line>
 		</s:Group>
-		<s:Label styleName="state" text="Er bevinden zich {data.length} nummers op dit toestel." fontSize="14" right="0" top="30" bottom="0" left="0"/>
-		<s:Label styleName="state" text="En 0 nummers op de server." fontSize="14" right="0" top="45" bottom="0" left="0"/>
+		<s:RichText styleName="state" left="0" right="0" top="0" bottom="0" paddingTop="30">
+			<s:textFlow>
+				<s:TextFlow>
+					<s:p textAlign="center">
+						Er bevinden zich <s:span color="0xcccccc">{startLength}</s:span> nummers op dit toestel.<s:br/>
+						En <s:span color="0xcccccc">{searchLength}</s:span> nummers in deze lijst.
+					</s:p>
+				</s:TextFlow>
+			</s:textFlow>               
+		</s:RichText>
+		<!--<s:TextArea editable="false" styleName="state" borderVisible="false"
+			contentBackgroundColor="0xFFFFFF" 
+			contentBackgroundAlpha="0" ><s:textFlow>
+				<s:TextFlow>
+					<s:p>
+						<s:span>Er</s:span> bevinden zich {data.length} nummers op dit toestel.
+					</s:p>
+				</s:TextFlow>
+			</s:textFlow>	
+		</s:TextArea>-->
+		<!--<s:Label styleName="state" text="Er bevinden zich {data.length} nummers op dit toestel." fontSize="14" right="0" top="30" bottom="0" left="0"/>
+		<s:Label styleName="state" text="En 0 nummers in dit overzicht." fontSize="14" right="0" top="45" bottom="0" left="0"/>-->
 	</s:Group>
 </s:View>

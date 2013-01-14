@@ -2,29 +2,7 @@
 @namespace s "library://ns.adobe.com/flex/spark";
 @namespace renderers  "renderers.*";
 
-@font-face { 
-	src: url("../assets/fonts/droid-sans/DroidSans.ttf"); 
-	fontFamily: droid-sans; 
-	embedAsCFF: false; 
-}
 
-@font-face { 
-	src: url("../assets/fonts/droid-sans/DroidSans.ttf"); 
-	fontFamily: droid-sans-cff; 
-	embedAsCFF: true; 
-}
-
-@font-face { 
-	src: url("../assets/fonts/droid-sans/DroidSans-Bold.ttf"); 
-	fontFamily: droid-sans-bold; 
-	embedAsCFF: false; 
-}
-
-@font-face { 
-	src: url("../assets/fonts/droid-sans/DroidSans-Bold.ttf"); 
-	fontFamily: droid-sans-bold-cff; 
-	embedAsCFF: true; 
-}
 
 s|ViewNavigatorApplication {
 	fontFamily: droid-sans;
