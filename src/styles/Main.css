@@ -102,3 +102,52 @@ renderers|BedrijfRenderer:selected
 	left: 0;
 	right: 0;
 }
+
+.homeTitle, .infoTitle, .searchTitle{
+	color: #ffffff;
+	font-size: 38px;
+	font-family: "Droid Sans";
+	font-weight: bold;
+}
+
+.infoTitle{
+	color: #47BFE5;	
+	font-weight: normal;
+	text-align: center;
+}
+
+.searchTitle{
+	color: #535F63;	
+	font-weight: normal;
+	text-align: center;
+	font-size: 30px;
+}
+
+
+#homeButton, #infoButton, #searchButton{
+	skinClass: ClassReference("skins.actionscript.InfoButton");
+	font-size: 22px;
+	font-weight: normal;
+	font-family: "Droid Sans";
+	color: #ffffff;
+}
+
+.homeLabel, .infoLabel, .searchLabel{
+	font-size: 24px;
+	font-weight: normal;
+	font-family: "Droid Sans";
+	color: #7A878C;
+	text-align: center;
+}
+
+.infoLabel{
+	font-size: 17px;
+	text-align: justify;
+	paddingRight: 40px;
+	paddingLeft: 40px;
+}
+
+.searchLabel{
+	font-size: 18px;
+	color: #535F63;
+}

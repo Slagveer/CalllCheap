@@ -1,22 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" styleName="infoView" creationComplete="creationCompleteHandler(event)"
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		xmlns:s="library://ns.adobe.com/flex/spark" title="CallCheapInfoView">
+	
 	<fx:Script>
 		<![CDATA[
-			import mx.events.FlexEvent;
+			import skins.actionscript.ActionBarButton;
 			
-			protected function creationCompleteHandler(event:FlexEvent):void
+			protected function clickHandler(event:MouseEvent):void
 			{
 				// TODO Auto-generated method stub
-				this.actionBarVisible = false; 
+				navigator.pushView(CallCheapHomeView);
+			}
+			
+			protected function infoButton_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				this.navigator.pushView(CallCheapSearchView)
 			}
 			
 		]]>
 	</fx:Script>
+	
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
-
 	
-	<s:Label text="Hello World!"/>
+	<s:actionContent>
+		<s:Button skinClass="skins.actionscript.ActionBarButton" icon="@Embed('assets/icons/info_icon.png')" click="clickHandler(event)"/>
+		<s:Button skinClass="skins.actionscript.ActionBarButton" icon="@Embed('assets/icons/mobile_icon.png')" click="clickHandler(event)"/>
+		<s:Button skinClass="skins.actionscript.ActionBarButton" icon="@Embed('assets/icons/search_icon.png')" click="clickHandler(event)"/>
+	</s:actionContent> 
+	
+	<s:Label text="Welkom bij CallCheap" top="40" styleName="infoTitle" horizontalCenter="0"/>
+	<s:Label id="infoLabel" styleName="infoLabel" width="100%"
+			 text="CallCheap, de 0900 killer app. Bel i.p.v. de dure 0900 nummers de goedkope nummers. Het komt tegenwoordig steeds vaker voor dat bedrijven voor de consument alleen bereikbaar zijn via een 0900-telefoonnummer. Deze nummers kunnen erg duur zijn, 70 cent per minuut is tegenwoordig niets bijzonders meer. En hoe duurder het bellen van zo'n nummer is, hoe langer het duurt voor u de juiste persoon aan de lijn heeft. Vaak krijgt u, voor u het keuzemenu eerst ook nog eens een reclameverhaaltje van het bedrijf te horen." 
+			 top="110" horizontalCenter="0"/>
+	<s:Button id="infoButton" label="Laat maar zien" horizontalCenter="0" top="400" click="infoButton_clickHandler(event)"/>
 </s:View>

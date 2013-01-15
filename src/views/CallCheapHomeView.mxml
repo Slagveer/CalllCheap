@@ -1,119 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
-		xmlns:s="library://ns.adobe.com/flex/spark" title="CallCheap" xmlns:fxg="skins.fxg.*" creationComplete="creationCompleteHandler(event)" xmlns:dao="dao.*">
-	<fx:Declarations>
-		<!-- Place non-visual elements (e.g., services, value objects) here -->
-		<dao:BedrijfDAO id="srv"/>
-	</fx:Declarations>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" styleName="homeView" creationComplete="creationCompleteHandler(event)"
+		xmlns:s="library://ns.adobe.com/flex/spark" title="CallCheapHomeView">
 	<fx:Script>
 		<![CDATA[
 			import mx.events.FlexEvent;
-			[Bindable]
-			private var startLength:Number = 0;
-			[Bindable]
-			private var searchLength:Number = 0;
 			
-			protected function searchBar_clickHandler(event:MouseEvent):void
-			{
-				// TODO Auto-generated method stub
-				this.data = srv.findByName(this.key.text);
-				if(data){
-					this.searchLength = this.data.length;
-				}else{
-					this.searchLength = 0;
-				}
-			}
+			[Bindable]
+			[Embed(source="/assets/images/applogo_160.png")]
+			private var logo160:Class;
+			
+			[Bindable]
+			[Embed(source="/assets/images/applogo_240.png")]
+			private var logo240:Class;
+			
+			[Bindable]
+			[Embed(source="/assets/images/applogo_320.png")]
+			private var logo320:Class;
 			
 			protected function creationCompleteHandler(event:FlexEvent):void
 			{
 				// TODO Auto-generated method stub
-				this.searchBar.percentWidth = 100;
-				this.data = srv.findByName('');
-				if(data){
-					startLength = this.data.length;
-					searchLength = this.data.length;
-				}
+				this.actionBarVisible = false; 
+				//this.info.percentWidth = 100;
+				//this.info.percentHeight = 100;
+				this.homeLabel.percentWidth = 100;
+			}
+			
+			protected function infoButton_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				this.navigator.pushView(CallCheapListView);
 			}
 			
 		]]>
 	</fx:Script>
-	
-	<s:Group>
-		<s:Rect width="500" height="100">
-			<s:fill><s:SolidColor color="0x1E2427" /></s:fill>
-		</s:Rect>
-		<s:Line xFrom="0" yFrom="88" xTo="500" yTo="88">
-			<s:stroke>
-				<s:SolidColorStroke color="0x141B1F"/>
-			</s:stroke>
-		</s:Line>
-		<s:Line xFrom="0" yFrom="89" xTo="500" yTo="89">
-			<s:stroke>
-				<s:SolidColorStroke color="0x272E31"/>
-			</s:stroke>
-		</s:Line>
-		
-		<s:Group id="searchBar">
-			<s:layout>
-				<s:HorizontalLayout horizontalAlign="center" gap="0" verticalAlign="middle" paddingTop="15"/>
-			</s:layout>
-		
-			<s:Button skinClass="skins.actionscript.SearchBarButton" width="55" height="53" click="searchBar_clickHandler(event)"/>
-			
-			<s:SkinnableContainer skinClass="skins.actionscript.SearchBarTextInput" width="374">
-				<s:TextInput id="key" bottom="0" left="0" top="1" right="10" styleName="searchbar-text" borderVisible="false" height="52" contentBackgroundColor="0xFFFFFF">
-					<s:text>Lorem ipsum dolor sit amet.</s:text>
-				</s:TextInput>
-			</s:SkinnableContainer>	
-		</s:Group>
-	</s:Group>
-	
-	<s:List id="list" top="90" bottom="90" left="0" right="0" dataProvider="{data}" horizontalScrollPolicy="off" itemRenderer="renderers.BedrijfRenderer" contentBackgroundAlpha="0"/>
-	
-	<s:Group bottom="0">
-		<s:Rect width="500" height="49" bottom="0">
-			<s:fill><s:SolidColor color="0x1E2427" /></s:fill>
-		</s:Rect>
-		<s:Rect width="500" height="39" bottom="49">
-			<s:fill><s:SolidColor color="0x22272A" /></s:fill>
-		</s:Rect>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
 
-		<s:Group bottom="0" height="90">
-			<s:layout>
-				<s:VerticalLayout gap="0" paddingTop="0" paddingBottom="0"/>
-			</s:layout>
-			<s:Line xFrom="0" yFrom="90" xTo="500" yTo="90">
-				<s:stroke>
-					<s:SolidColorStroke color="0x141B1F" weight="1"/>
-				</s:stroke>
-			</s:Line>
-			<s:Line xFrom="0" yFrom="89" xTo="500" yTo="89">
-				<s:stroke>
-					<s:SolidColorStroke color="0x272E31" weight="1"/>
-				</s:stroke>
-			</s:Line>
-		</s:Group>
-		<s:RichText styleName="state" left="0" right="0" top="0" bottom="0" paddingTop="30">
-			<s:textFlow>
-				<s:TextFlow>
-					<s:p textAlign="center">
-						Er bevinden zich <s:span color="0xffffff">{startLength}</s:span> nummers op dit toestel.<s:br/>
-						En <s:span color="0xffffff">{searchLength}</s:span> nummers in deze lijst.
-					</s:p>
-				</s:TextFlow>
-			</s:textFlow>               
-		</s:RichText>
-		<!--<s:TextArea editable="false" styleName="state" borderVisible="false"
-			contentBackgroundColor="0xFFFFFF" 
-			contentBackgroundAlpha="0" ><s:textFlow>
-				<s:TextFlow>
-					<s:p>
-						<s:span>Er</s:span> bevinden zich {data.length} nummers op dit toestel.
-					</s:p>
-				</s:TextFlow>
-			</s:textFlow>	
-		</s:TextArea>-->
-		<!--<s:Label styleName="state" text="Er bevinden zich {data.length} nummers op dit toestel." fontSize="14" right="0" top="30" bottom="0" left="0"/>
-		<s:Label styleName="state" text="En 0 nummers in dit overzicht." fontSize="14" right="0" top="45" bottom="0" left="0"/>-->
-	</s:Group>
+	
+	<s:BitmapImage source="{logo160}" width="137" height="162" horizontalCenter="0" depth="0" top="200"/>
+	<s:Label text="CallCheap" top="380" styleName="homeTitle" horizontalCenter="0"/>
+	<s:Button id="homeButton" label="Begin de 0900 avontuur" horizontalCenter="0" top="430" click="infoButton_clickHandler(event)"/>
+	<s:Label id="homeLabel" styleName="homeLabel" 
+			 text="Gratis applicatie waarmee je in plaats van de dure 0900 nummers de goedkope nummers belt." top="490" horizontalCenter="0" paddingLeft="10"/>
+	
 </s:View>

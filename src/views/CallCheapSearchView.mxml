@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" title="CallCheapSearchView">
+	<fx:Script>
+		<![CDATA[
+			import skins.actionscript.ActionBarButton;
+			import skins.actionscript.SearchTextInput;
+			
+			[Bindable]
+			[Embed(source="/assets/images/searchsheep_160.png")]
+			private var sheep160:Class;
+			
+			protected function clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				navigator.pushView(CallCheapHomeView);
+			}
+			
+			protected function searchButton_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				navigator.pushView(CallCheapListView,this.key);
+			}
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<s:actionContent>
+		<s:Button skinClass="skins.actionscript.ActionBarButton" icon="@Embed('assets/icons/info_icon.png')" click="clickHandler(event)"/>
+		<s:Button skinClass="skins.actionscript.ActionBarButton" icon="@Embed('assets/icons/mobile_icon.png')" click="clickHandler(event)"/>
+		<s:Button skinClass="skins.actionscript.ActionBarButton" icon="@Embed('assets/icons/search_icon.png')" click="clickHandler(event)"/>
+	</s:actionContent> 
+	
+	<s:BitmapImage source="{sheep160}" width="162" height="141" horizontalCenter="0" depth="0" top="40"/>
+	<s:Label text="CallCheap" top="200" styleName="searchTitle" horizontalCenter="0"/>
+	<s:Label styleName="searchLabel" text="De enige echte 0900 killer!" top="235" horizontalCenter="0"/>
+	<s:SkinnableContainer skinClass="skins.actionscript.SearchTextInput" width="384" top="270" horizontalCenter="0">
+		<s:TextInput id="key" bottom="0" left="10" top="1" right="10" styleName="searchbar-text" borderVisible="false" height="52" contentBackgroundColor="0xFFFFFF">
+			<s:text>Lorem ipsum dolor sit amet.</s:text>
+		</s:TextInput>
+	</s:SkinnableContainer>	
+	<s:Button id="searchButton" label="Zoeken" horizontalCenter="0" top="430" click="searchButton_clickHandler(event)"/>
+</s:View>
