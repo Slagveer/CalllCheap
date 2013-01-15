@@ -9,9 +9,9 @@
 		<![CDATA[
 			import mx.events.FlexEvent;
 			[Bindable]
-			var startLength:Number = 0;
+			private var startLength:Number = 0;
 			[Bindable]
-			var searchLength:Number = 0;
+			private var searchLength:Number = 0;
 			
 			protected function searchBar_clickHandler(event:MouseEvent):void
 			{
@@ -68,7 +68,7 @@
 		</s:Group>
 	</s:Group>
 	
-	<s:List id="list" top="90" bottom="90" left="0" right="0" dataProvider="{data}" horizontalScrollPolicy="off" itemRenderer="renderers.BedrijfRenderer"/>
+	<s:List id="list" top="90" bottom="90" left="0" right="0" dataProvider="{data}" horizontalScrollPolicy="off" itemRenderer="renderers.BedrijfRenderer" contentBackgroundAlpha="0"/>
 	
 	<s:Group bottom="0">
 		<s:Rect width="500" height="49" bottom="0">
@@ -97,8 +97,8 @@
 			<s:textFlow>
 				<s:TextFlow>
 					<s:p textAlign="center">
-						Er bevinden zich <s:span color="0xcccccc">{startLength}</s:span> nummers op dit toestel.<s:br/>
-						En <s:span color="0xcccccc">{searchLength}</s:span> nummers in deze lijst.
+						Er bevinden zich <s:span color="0xffffff">{startLength}</s:span> nummers op dit toestel.<s:br/>
+						En <s:span color="0xffffff">{searchLength}</s:span> nummers in deze lijst.
 					</s:p>
 				</s:TextFlow>
 			</s:textFlow>               

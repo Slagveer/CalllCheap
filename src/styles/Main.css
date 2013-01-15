@@ -6,6 +6,11 @@
 
 s|ViewNavigatorApplication {
 	fontFamily: droid-sans;
+	skinClass: ClassReference("skins.actionscript.App");
+}
+
+s|View{
+	backgroundAlpha: 0;
 }
 
 s|ActionBar { 
@@ -83,7 +88,7 @@ renderers|BedrijfRenderer:selected
 	font-family: "Droid Sans";
 	text-align: center;
 	color: #7B878B;
-	font-size: 10px;
+	font-size: 14px;
 }
 
 .state .total{
