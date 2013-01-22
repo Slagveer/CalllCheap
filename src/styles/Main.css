@@ -17,6 +17,7 @@ s|ActionBar {
 	fontFamily: droid-sans;
 	color: #FFFFFF;
 	skinClass: ClassReference("skins.actionscript.ActionBar");
+	chromeColor: #0ca4d6;
 }
 
 s|ActionBar #titleDisplay{

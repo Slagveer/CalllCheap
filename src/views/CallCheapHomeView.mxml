@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:View xmlns:fx="http://ns.adobe.com/mxml/2009" styleName="homeView" creationComplete="creationCompleteHandler(event)"
-		xmlns:s="library://ns.adobe.com/flex/spark" title="CallCheapHomeView">
+		xmlns:s="library://ns.adobe.com/flex/spark" title="CallCheapHomeView" xmlns:debugger="com.demonsters.debugger.*">
 	<fx:Script>
 		<![CDATA[
 			import mx.events.FlexEvent;
@@ -30,6 +30,7 @@
 			{
 				// TODO Auto-generated method stub
 				this.navigator.pushView(CallCheapListView);
+				monsterDebugger.trace(this, "Hello World!");
 			}
 			
 		]]>
@@ -38,7 +39,7 @@
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
 
-	
+	<debugger:MonsterDebuggerFlex id="monsterDebugger"/>
 	<s:BitmapImage source="{logo160}" width="137" height="162" horizontalCenter="0" depth="0" top="200"/>
 	<s:Label text="CallCheap" top="380" styleName="homeTitle" horizontalCenter="0"/>
 	<s:Button id="homeButton" label="Begin de 0900 avontuur" horizontalCenter="0" top="430" click="infoButton_clickHandler(event)"/>

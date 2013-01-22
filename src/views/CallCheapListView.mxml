@@ -7,20 +7,26 @@
 	</fx:Declarations>
 	<fx:Script>
 		<![CDATA[
+			import mx.collections.ArrayCollection;
 			import mx.events.FlexEvent;
+			
+			import spark.events.IndexChangeEvent;
 			
 			import skins.actionscript.ActionBarButton;
 			[Bindable]
 			private var startLength:Number = 0;
 			[Bindable]
 			private var searchLength:Number = 0;
+			[Bindable]
+			private var bedrijven:ArrayCollection = new ArrayCollection();
 			
 			protected function searchBar_clickHandler(event:MouseEvent):void
 			{
 				// TODO Auto-generated method stub
-				this.data = srv.findByName(this.key.text);
-				if(data){
-					this.searchLength = this.data.length;
+				this.bedrijven = srv.findByName(this.key.text);
+				this.data.key = this.key.text;
+				if(bedrijven){
+					this.searchLength = bedrijven.length;
 				}else{
 					this.searchLength = 0;
 				}
@@ -30,10 +36,20 @@
 			{
 				// TODO Auto-generated method stub
 				this.searchBar.percentWidth = 100;
-				this.data = srv.findByName('');
-				if(data){
-					startLength = this.data.length;
-					searchLength = this.data.length;
+				if(this.data !== null){
+					this.bedrijven = srv.findByName(this.data.key);
+					this.key.text = this.data.key;
+					this.startLength = this.data.startLength;
+				}else{
+					this.bedrijven = srv.findByName('');
+					this.data = new Object();
+					this.data.startLength = this.bedrijven.length;
+					this.startLength = this.bedrijven.length;
+				}
+				
+				if(this.bedrijven != null){
+					//startLength = this.bedrijven.length;
+					searchLength = this.bedrijven.length;
 				}
 			}
 			
@@ -43,13 +59,25 @@
 				this.navigator.pushView(CallCheapInfoView);
 			}
 			
+			protected function list_changeHandler(event:IndexChangeEvent):void
+			{
+				// TODO Auto-generated method stub
+				
+			}
+			
+			protected function list_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				trace(list.selectedItem["goedkoop"]);
+			}
+			
 		]]>
 	</fx:Script>
 	
 	<s:actionContent>
-		<s:Button skinClass="skins.actionscript.ActionBarButton" icon="@Embed('assets/icons/info_icon.png')" click="clickHandler(event)"/>
-		<s:Button skinClass="skins.actionscript.ActionBarButton" icon="@Embed('assets/icons/mobile_icon.png')" click="navigator.popToFirstView()"/>
-		<s:Button skinClass="skins.actionscript.ActionBarButton" icon="@Embed('assets/icons/search_icon.png')" click="navigator.popToFirstView()"/>
+		<s:Button skinClass="skins.actionscript.ActionBarButton" icon="@Embed('assets/icons/info_icon.png')" click="navigator.pushView(CallCheapInfoView, this.data)"/>
+		<s:Button skinClass="skins.actionscript.ActionBarButton" icon="@Embed('assets/icons/mobile_icon.png')"/>
+		<s:Button skinClass="skins.actionscript.ActionBarButton" icon="@Embed('assets/icons/search_icon.png')" click="navigator.pushView(CallCheapSearchView, this.data)"/>
 	</s:actionContent> 
 	
 	<s:Group>
@@ -76,13 +104,13 @@
 			
 			<s:SkinnableContainer skinClass="skins.actionscript.SearchBarTextInput" width="374">
 				<s:TextInput id="key" bottom="0" left="0" top="1" right="10" styleName="searchbar-text" borderVisible="false" height="52" contentBackgroundColor="0xFFFFFF">
-					<s:text>Lorem ipsum dolor sit amet.</s:text>
+					<s:text>Type bedrijfsnaam of nummer</s:text>
 				</s:TextInput>
 			</s:SkinnableContainer>	
 		</s:Group>
 	</s:Group>
 	
-	<s:List id="list" top="90" bottom="90" left="0" right="0" dataProvider="{data}" horizontalScrollPolicy="off" itemRenderer="renderers.BedrijfRenderer" contentBackgroundAlpha="0"/>
+	<s:List id="list" top="90" bottom="90" left="0" right="0" dataProvider="{bedrijven}" horizontalScrollPolicy="off" itemRenderer="renderers.BedrijfRenderer" contentBackgroundAlpha="0" change="list_changeHandler(event)" click="list_clickHandler(event)"/>
 	
 	<s:Group bottom="0">
 		<s:Rect width="500" height="49" bottom="0">
@@ -117,17 +145,5 @@
 				</s:TextFlow>
 			</s:textFlow>               
 		</s:RichText>
-		<!--<s:TextArea editable="false" styleName="state" borderVisible="false"
-			contentBackgroundColor="0xFFFFFF" 
-			contentBackgroundAlpha="0" ><s:textFlow>
-				<s:TextFlow>
-					<s:p>
-						<s:span>Er</s:span> bevinden zich {data.length} nummers op dit toestel.
-					</s:p>
-				</s:TextFlow>
-			</s:textFlow>	
-		</s:TextArea>-->
-		<!--<s:Label styleName="state" text="Er bevinden zich {data.length} nummers op dit toestel." fontSize="14" right="0" top="30" bottom="0" left="0"/>
-		<s:Label styleName="state" text="En 0 nummers in dit overzicht." fontSize="14" right="0" top="45" bottom="0" left="0"/>-->
 	</s:Group>
 </s:View>

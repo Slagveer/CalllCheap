@@ -20,8 +20,8 @@ package skins.actionscript
 			{
 				case DPIClassification.DPI_320:
 				{
-					//upBorderSkin = spark.skins.mobile320.assets.TransparentActionButton_up;
-					//downBorderSkin = spark.skins.mobile320.assets.TransparentActionButton_down;
+					upBorderSkin = skins.fxg.ActionBarButton_up;
+					downBorderSkin = skins.fxg.ActionBarButton_down;
 					
 					break;
 				}

@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
-		xmlns:s="library://ns.adobe.com/flex/spark" title="CallCheapSearchView">
+		xmlns:s="library://ns.adobe.com/flex/spark" title="CallCheapSearchView" creationComplete="creationCompleteHandler(event)">
 	<fx:Script>
 		<![CDATA[
+			import mx.events.FlexEvent;
+			
 			import skins.actionscript.ActionBarButton;
 			import skins.actionscript.SearchTextInput;
 			
@@ -13,14 +15,24 @@
 			protected function clickHandler(event:MouseEvent):void
 			{
 				// TODO Auto-generated method stub
-				navigator.pushView(CallCheapHomeView);
+				navigator.pushView(CallCheapHomeView, this.data);
 			}
 			
 			protected function searchButton_clickHandler(event:MouseEvent):void
 			{
 				// TODO Auto-generated method stub
-				navigator.pushView(CallCheapListView,this.key);
+				this.data.key = this.key.text;
+				navigator.pushView(CallCheapListView, this.data);
 			}
+			
+			protected function creationCompleteHandler(event:FlexEvent):void
+			{
+				// TODO Auto-generated method stub
+				if(this.data !== null && this.data.key != null && this.data.key != ""){
+					this.key.text = this.data.key;
+				}
+			}
+			
 		]]>
 	</fx:Script>
 	<fx:Declarations>
@@ -28,9 +40,9 @@
 	</fx:Declarations>
 	
 	<s:actionContent>
-		<s:Button skinClass="skins.actionscript.ActionBarButton" icon="@Embed('assets/icons/info_icon.png')" click="clickHandler(event)"/>
-		<s:Button skinClass="skins.actionscript.ActionBarButton" icon="@Embed('assets/icons/mobile_icon.png')" click="clickHandler(event)"/>
-		<s:Button skinClass="skins.actionscript.ActionBarButton" icon="@Embed('assets/icons/search_icon.png')" click="clickHandler(event)"/>
+		<s:Button skinClass="skins.actionscript.ActionBarButton" icon="@Embed('assets/icons/info_icon.png')" click="navigator.pushView(CallCheapInfoView, this.data)"/>
+		<s:Button skinClass="skins.actionscript.ActionBarButton" icon="@Embed('assets/icons/mobile_icon.png')" click="navigator.pushView(CallCheapListView, this.data)"/>
+		<s:Button skinClass="skins.actionscript.ActionBarButton" icon="@Embed('assets/icons/search_icon.png')"/>
 	</s:actionContent> 
 	
 	<s:BitmapImage source="{sheep160}" width="162" height="141" horizontalCenter="0" depth="0" top="40"/>
@@ -38,8 +50,8 @@
 	<s:Label styleName="searchLabel" text="De enige echte 0900 killer!" top="235" horizontalCenter="0"/>
 	<s:SkinnableContainer skinClass="skins.actionscript.SearchTextInput" width="384" top="270" horizontalCenter="0">
 		<s:TextInput id="key" bottom="0" left="10" top="1" right="10" styleName="searchbar-text" borderVisible="false" height="52" contentBackgroundColor="0xFFFFFF">
-			<s:text>Lorem ipsum dolor sit amet.</s:text>
+			<s:text>Type bedrijfsnaam of nummer</s:text>
 		</s:TextInput>
 	</s:SkinnableContainer>	
-	<s:Button id="searchButton" label="Zoeken" horizontalCenter="0" top="430" click="searchButton_clickHandler(event)"/>
+	<s:Button id="searchButton" label="Zoeken" horizontalCenter="0" top="340" click="searchButton_clickHandler(event)"/>
 </s:View>
