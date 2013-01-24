@@ -42,9 +42,9 @@
 					this.startLength = this.data.startLength;
 				}else{
 					this.bedrijven = srv.findByName('');
-					this.data = new Object();
-					this.data.startLength = this.bedrijven.length;
-					this.startLength = this.bedrijven.length;
+					this.data = {startLength:0};
+ 					this.data.startLength = (this.bedrijven !== null) ? this.bedrijven.length : 0;
+					this.startLength = (this.bedrijven !== null) ? this.bedrijven.length : 0;
 				}
 				
 				if(this.bedrijven != null){

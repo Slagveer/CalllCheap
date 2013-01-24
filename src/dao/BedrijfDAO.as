@@ -79,7 +79,6 @@ package dao
 		
 		public function create(bedrijf:Bedrijf):void
 		{
-			trace(bedrijf.naam);
 			var sql:String = 
 				"INSERT INTO bedrijf (id, naam, duur, goedkoop, datum, correct) " +
 				"VALUES (?,?,?,?,?,?)";
@@ -119,7 +118,7 @@ package dao
 			var file:File = File.documentsDirectory.resolvePath("CallCheap.db");
 			var fileExists:Boolean = file.exists;
 			_sqlConnection = new SQLConnection();
-			_sqlConnection.open(file);trace(fileExists);
+			_sqlConnection.open(file);
 			if (!fileExists)
 			{
 				createDatabase();
@@ -151,20 +150,21 @@ package dao
 			stream.open(file, FileMode.READ);
 			var xml:XML = XML(stream.readUTFBytes(stream.bytesAvailable));
 			stream.close();
-			var bedrijfDAO:BedrijfDAO = new BedrijfDAO();trace(xml);
-			for each (var bdr:XML in xml.Bedrijven)
+			var bedrijfDAO:BedrijfDAO = new BedrijfDAO();
+			for each (var bdr:XML in xml.bedrijf)
 			{
+				var space:RegExp = /\s/g;
 				var bedrijf:Bedrijf = new Bedrijf();
 				bedrijf.id = bdr.id;
 				bedrijf.naam = bdr.naam;
-				bedrijf.duur = bdr.duur;
-				bedrijf.goedkoop = bdr.goedkoop;
+				bedrijf.duur = String(bdr.duur).replace(space, "");;
+				bedrijf.goedkoop = String(bdr.goedkoop).replace(space, "");;
 				bedrijf.datum = bdr.datum;
 				bedrijf.correct = false;
-				bedrijfDAO.create(bedrijf);
-			}
+				if(bedrijf.duur !== null && bedrijf.goedkoop !== null && bedrijf.duur !== "" && bedrijf.goedkoop !== ""){
+					bedrijfDAO.create(bedrijf);
+				}
 		}
-		
-		
+		}
 	}
 }
