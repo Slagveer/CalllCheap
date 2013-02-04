@@ -157,8 +157,8 @@ package dao
 				var bedrijf:Bedrijf = new Bedrijf();
 				bedrijf.id = bdr.id;
 				bedrijf.naam = bdr.naam;
-				bedrijf.duur = String(bdr.duur).replace(space, "");;
-				bedrijf.goedkoop = String(bdr.goedkoop).replace(space, "");;
+				bedrijf.duur = String(bdr.duur).replace(space, "");
+				bedrijf.goedkoop = String(bdr.goedkoop).replace(space, "");
 				bedrijf.datum = bdr.datum;
 				bedrijf.correct = false;
 				if(bedrijf.duur !== null && bedrijf.goedkoop !== null && bedrijf.duur !== "" && bedrijf.goedkoop !== ""){

@@ -1,24 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
-		xmlns:s="library://ns.adobe.com/flex/spark" title="CallCheap" xmlns:fxg="skins.fxg.*" creationComplete="creationCompleteHandler(event)" xmlns:dao="dao.*">
+		xmlns:s="library://ns.adobe.com/flex/spark" title="CallCheap" xmlns:fxg="skins.fxg.*" creationComplete="creationCompleteHandler(event)" xmlns:dao="dao.*" xmlns:debugger="com.demonsters.debugger.*">
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 		<dao:BedrijfDAO id="srv"/>
 	</fx:Declarations>
 	<fx:Script>
 		<![CDATA[
+			import flash.net.navigateToURL;
+			
 			import mx.collections.ArrayCollection;
 			import mx.events.FlexEvent;
+			import mx.logging.ILogger;
+			import mx.logging.Log;
 			
 			import spark.events.IndexChangeEvent;
+			import spark.events.TextOperationEvent;
 			
 			import skins.actionscript.ActionBarButton;
+			
 			[Bindable]
 			private var startLength:Number = 0;
 			[Bindable]
 			private var searchLength:Number = 0;
 			[Bindable]
 			private var bedrijven:ArrayCollection = new ArrayCollection();
+			
+			private var logger:ILogger = Log.getLogger("CallCheapListView.mxml");
 			
 			protected function searchBar_clickHandler(event:MouseEvent):void
 			{
@@ -33,12 +41,20 @@
 			}
 			
 			protected function creationCompleteHandler(event:FlexEvent):void
-			{
+			{			
 				// TODO Auto-generated method stub
 				this.searchBar.percentWidth = 100;
 				if(this.data !== null){
-					this.bedrijven = srv.findByName(this.data.key);
-					this.key.text = this.data.key;
+					logger.error(this.data.key);
+					if(this.data.key != null){
+						this.bedrijven = srv.findByName(this.data.key);
+						this.key.text = this.data.key;
+					}else{
+						this.bedrijven = srv.findByName("");
+						this.key.text = "";
+					}
+					
+					
 					this.startLength = this.data.startLength;
 				}else{
 					this.bedrijven = srv.findByName('');
@@ -69,6 +85,50 @@
 			{
 				// TODO Auto-generated method stub
 				trace(list.selectedItem["goedkoop"]);
+				navigateToURL(new URLRequest("tel:" + list.selectedItem["goedkoop"]));
+			}
+			
+			protected function changeHandler(event:KeyboardEvent):void
+			{
+				// TODO Auto-generated method stub
+				trace(event.keyCode);
+				logger.error(event.keyCode.toString());
+				monsterDebugger.trace(this, event.keyCode);
+				if(event.keyCode === 13){
+					this.bedrijven = srv.findByName(this.key.text);
+					this.data.key = this.key.text;
+					if(bedrijven){
+						this.searchLength = bedrijven.length;
+					}else{
+						this.searchLength = 0;
+					}
+				}
+			}
+			
+			protected function key_changeHandler(event:TextOperationEvent):void
+			{
+				// TODO Auto-generated method stub
+				//logger.error(event.target);
+			}
+			
+			protected function key_softKeyboardDeactivateHandler(event:SoftKeyboardEvent):void
+			{
+				// TODO Auto-generated method stub
+				logger.error(event.target.toString());
+
+				this.bedrijven = srv.findByName(this.key.text);
+				this.data.key = this.key.text;
+				if(bedrijven){
+					this.searchLength = bedrijven.length;
+				}else{
+					this.searchLength = 0;
+				}
+			}
+			
+			protected function key_focusInHandler(event:FocusEvent):void
+			{
+				// TODO Auto-generated method stub
+				this.key.text = "";
 			}
 			
 		]]>
@@ -79,6 +139,8 @@
 		<s:Button skinClass="skins.actionscript.ActionBarButton" icon="@Embed('assets/icons/mobile_icon.png')"/>
 		<s:Button skinClass="skins.actionscript.ActionBarButton" icon="@Embed('assets/icons/search_icon.png')" click="navigator.pushView(CallCheapSearchView, this.data)"/>
 	</s:actionContent> 
+	
+	<debugger:MonsterDebuggerFlex id="monsterDebugger"/>
 	
 	<s:Group>
 		<s:Rect width="500" height="100">
@@ -103,7 +165,8 @@
 			<s:Button skinClass="skins.actionscript.SearchBarButton" width="55" height="53" click="searchBar_clickHandler(event)"/>
 			
 			<s:SkinnableContainer skinClass="skins.actionscript.SearchBarTextInput" width="374">
-				<s:TextInput id="key" bottom="0" left="0" top="1" right="10" styleName="searchbar-text" borderVisible="false" height="52" contentBackgroundColor="0xFFFFFF">
+				<s:TextInput id="key" bottom="0" left="0" top="1" right="10" styleName="searchbar-text" borderVisible="false" height="52" contentBackgroundColor="0xFFFFFF" keyUp="changeHandler(event)"
+							 softKeyboardType="default" change="key_changeHandler(event)" softKeyboardDeactivate="key_softKeyboardDeactivateHandler(event)" focusIn="key_focusInHandler(event)">
 					<s:text>Type bedrijfsnaam of nummer</s:text>
 				</s:TextInput>
 			</s:SkinnableContainer>	

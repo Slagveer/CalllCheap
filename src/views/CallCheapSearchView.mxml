@@ -12,6 +12,8 @@
 			[Embed(source="/assets/images/searchsheep_160.png")]
 			private var sheep160:Class;
 			
+			private var firstTime:Boolean = true;
+			
 			protected function clickHandler(event:MouseEvent):void
 			{
 				// TODO Auto-generated method stub
@@ -21,7 +23,11 @@
 			protected function searchButton_clickHandler(event:MouseEvent):void
 			{
 				// TODO Auto-generated method stub
+				if(this.data == null){
+					this.data = new Object();
+				}
 				this.data.key = this.key.text;
+
 				navigator.pushView(CallCheapListView, this.data);
 			}
 			
@@ -30,6 +36,21 @@
 				// TODO Auto-generated method stub
 				if(this.data !== null && this.data.key != null && this.data.key != ""){
 					this.key.text = this.data.key;
+				}
+				this.key.setFocus();
+				this.searchButton.setFocus();
+				this.setFocus();
+			}
+			
+			protected function key_focusInHandler(event:FocusEvent):void
+			{
+				// TODO Auto-generated method stub
+				if(this.firstTime !== true){
+					this.key.text = "";
+				}else{
+					this.firstTime = false;
+					//this.searchButton.setFocus();
+					this.setFocus();
 				}
 			}
 			
@@ -49,7 +70,7 @@
 	<s:Label text="CallCheap" top="200" styleName="searchTitle" horizontalCenter="0"/>
 	<s:Label styleName="searchLabel" text="De enige echte 0900 killer!" top="235" horizontalCenter="0"/>
 	<s:SkinnableContainer skinClass="skins.actionscript.SearchTextInput" width="384" top="270" horizontalCenter="0">
-		<s:TextInput id="key" bottom="0" left="10" top="1" right="10" styleName="searchbar-text" borderVisible="false" height="52" contentBackgroundColor="0xFFFFFF">
+		<s:TextInput id="key" bottom="0" left="10" top="1" right="10" styleName="searchbar-text" borderVisible="false" height="52" contentBackgroundColor="0xFFFFFF" focusIn="key_focusInHandler(event)">
 			<s:text>Type bedrijfsnaam of nummer</s:text>
 		</s:TextInput>
 	</s:SkinnableContainer>	

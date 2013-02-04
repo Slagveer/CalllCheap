@@ -21,7 +21,12 @@
 			{
 				// TODO Auto-generated method stub
 				getFonts();
-				
+				NativeApplication.nativeApplication.addEventListener(Event.DEACTIVATE, onDeactivateApp);
+			}
+			
+			protected function onDeactivateApp(event:Event):void
+			{
+				//NativeApplication.nativeApplication.exit();
 			}
 			
 		]]>
