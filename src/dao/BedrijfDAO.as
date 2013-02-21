@@ -115,7 +115,8 @@ package dao
 		public function get sqlConnection():SQLConnection
 		{
 			if (_sqlConnection) return _sqlConnection;
-			var file:File = File.documentsDirectory.resolvePath("CallCheap.db");
+			//var file:File = File.documentsDirectory.resolvePath("CallCheap.db");
+			var file:File = File.applicationStorageDirectory.resolvePath("CallCheap.db");
 			var fileExists:Boolean = file.exists;
 			_sqlConnection = new SQLConnection();
 			_sqlConnection.open(file);
